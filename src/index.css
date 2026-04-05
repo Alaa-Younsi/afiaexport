@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   AFIA EXPORT — Global Styles
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #F5F7FA;
+  color: #1E2733;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
+}
+
+/* Arabic body font override */
+[dir="rtl"] body,
+[dir="rtl"] {
+  font-family: 'Cairo', sans-serif;
+}
+
+/* Hero entrance animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease both;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 1s ease 0.3s both;
+}
+
+/* Smooth focus ring for all interactive elements */
+*:focus-visible {
+  outline: 2px solid #D94E2A;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hero background — left-anchored on mobile (unused on mobile now), centered on desktop */
+.hero-bg {
+  background-position: 20% center;
+}
+@media (min-width: 768px) {
+  .hero-bg {
+    background-position: center center;
+  }
+}
+
+/* Phone hero background — portrait image, centered */
+.phone-hero-bg {
+  background-position: center center;
+}
+
