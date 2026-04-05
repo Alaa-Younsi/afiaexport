@@ -14,7 +14,7 @@ export default function WhyUs() {
 
         {/* Section header */}
         <div className="text-center mb-14">
-          <span className={`inline-block text-xs font-semibold uppercase text-white/60 mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
+          <span className={`inline-block text-xs font-semibold uppercase text-secondary mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
             {t('whyus.label')}
           </span>
           <h2
@@ -33,8 +33,8 @@ export default function WhyUs() {
               className={`bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:-translate-y-1 transition-all duration-200 ${isRtl ? 'text-right' : 'text-center'}`}
             >
               <div className={`mb-4 ${isRtl ? 'flex justify-end' : 'flex justify-center'}`}>
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <div className="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center">
+                  <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>

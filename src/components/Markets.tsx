@@ -25,13 +25,13 @@ const AfricaIcon = () => (
   <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 mx-auto mb-4" aria-hidden="true">
     <circle cx="28" cy="28" r="26" fill="#FFF5F0"/>
     {/* Desert sun */}
-    <circle cx="28" cy="8" r="4.5" fill="#F97316"/>
+    <circle cx="28" cy="8" r="4.5" fill="#CC1A1A"/>
     {/* Pyramid main face */}
-    <polygon points="28,15 11,43 45,43" fill="#D94E2A" opacity="0.85"/>
+    <polygon points="28,15 11,43 45,43" fill="#CC1A1A" opacity="0.85"/>
     {/* Pyramid shadow face — right half darker */}
-    <polygon points="28,15 28,43 45,43" fill="#B83B20" opacity="0.4"/>
+    <polygon points="28,15 28,43 45,43" fill="#991010" opacity="0.4"/>
     {/* Sand base */}
-    <rect x="10" y="43" width="36" height="3" rx="1.5" fill="#D94E2A" opacity="0.3"/>
+    <rect x="10" y="43" width="36" height="3" rx="1.5" fill="#CC1A1A" opacity="0.3"/>
   </svg>
 );
 
@@ -76,8 +76,8 @@ const marketData = [
     key: 'africa' as const,
     Icon: AfricaIcon,
     descKey: 'markets.africa.desc' as const,
-    color: 'bg-orange-50 border-orange-200',
-    accentColor: 'text-primary',
+    color: 'bg-red-50 border-red-200',
+    accentColor: 'text-secondary',
   },
   {
     key: 'middleeast' as const,
@@ -114,7 +114,7 @@ export default function Markets() {
 
         {/* Section header */}
         <div className="text-center mb-14">
-          <span className={`inline-block text-xs font-semibold uppercase text-primary mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
+          <span className={`inline-block text-xs font-semibold uppercase text-secondary mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
             {t('markets.label')}
           </span>
           <h2

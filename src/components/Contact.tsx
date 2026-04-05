@@ -32,7 +32,7 @@ export default function Contact() {
     setSubmitted(true);
   };
 
-  const inputClass = `w-full border border-gray-200 rounded-xl px-4 py-3 text-dark bg-white focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-sm md:text-base ${
+  const inputClass = `w-full border border-gray-200 rounded-xl px-4 py-3 text-dark bg-white focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-all text-sm md:text-base ${
     isRtl ? 'text-right' : 'text-left'
   }`;
 
@@ -42,7 +42,7 @@ export default function Contact() {
 
         {/* Section header */}
         <div className="text-center mb-14">
-          <span className={`inline-block text-xs font-semibold uppercase text-primary mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
+          <span className={`inline-block text-xs font-semibold uppercase text-secondary mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
             {t('contact.label')}
           </span>
           <h2
@@ -73,7 +73,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className={`block text-sm font-medium text-dark mb-1.5 ${isRtl ? 'text-right' : ''}`} style={fontAr}>
-                      {t('contact.name')} <span className="text-primary">*</span>
+                      {t('contact.name')} <span className="text-secondary">*</span>
                     </label>
                     <input
                       id="name"
@@ -89,7 +89,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <label htmlFor="email" className={`block text-sm font-medium text-dark mb-1.5 ${isRtl ? 'text-right' : ''}`} style={fontAr}>
-                      {t('contact.email')} <span className="text-primary">*</span>
+                      {t('contact.email')} <span className="text-secondary">*</span>
                     </label>
                     <input
                       id="email"
@@ -121,7 +121,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <label htmlFor="message" className={`block text-sm font-medium text-dark mb-1.5 ${isRtl ? 'text-right' : ''}`} style={fontAr}>
-                    {t('contact.message')} <span className="text-primary">*</span>
+                    {t('contact.message')} <span className="text-secondary">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -136,7 +136,7 @@ export default function Contact() {
                 </div>
                 <button
                   type="submit"
-                  className={`bg-primary hover:bg-orange-700 text-white rounded-xl px-8 py-3.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${isRtl ? 'w-full' : 'w-full sm:w-auto'}`}
+                  className={`bg-primary hover:bg-red-800 text-white rounded-xl px-8 py-3.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${isRtl ? 'w-full' : 'w-full sm:w-auto'}`}
                   style={fontAr}
                 >
                   {t('contact.send')}
@@ -165,14 +165,14 @@ export default function Contact() {
             {/* Email card */}
             <div className={`bg-white rounded-2xl p-6 shadow-sm w-full ${isRtl ? 'text-right' : ''}`}>
               <div className={`flex items-center gap-3 mb-2 ${isRtl ? 'flex-row-reverse' : ''}`}>
-                <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <div className="w-9 h-9 bg-secondary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <span className="font-semibold text-dark text-sm" style={fontAr}>Email</span>
               </div>
-              <a href={`mailto:${BUSINESS_EMAIL}`} className="text-primary hover:underline text-sm break-all">
+              <a href={`mailto:${BUSINESS_EMAIL}`} className="text-secondary hover:underline text-sm break-all">
                 {BUSINESS_EMAIL}
               </a>
             </div>

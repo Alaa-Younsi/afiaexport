@@ -83,7 +83,7 @@ const en: Translations = {
   'nav.contact': 'Contact',
 
   'hero.title': 'AFIA EXPORT',
-  'hero.subtitle': 'Algerian Cement & Clinker Specialists — Supplying Quality to Global Markets',
+  'hero.subtitle': 'Specialists in cement and clinker — quality for global markets',
   'hero.cta': 'Discover Our Products',
   'hero.cta2': 'Contact Us',
   'hero.label': 'Algeria · Cement & Clinker Exports',
@@ -206,7 +206,7 @@ const fr: Translations = {
   'nav.contact': 'Contact',
 
   'hero.title': 'AFIA EXPORT',
-  'hero.subtitle': 'Spécialistes Algériens en Ciment & Clinker — Qualité pour les Marchés Internationaux',
+  'hero.subtitle': 'Spécialistes du ciment et du clinker — la qualité pour les marchés mondiaux',
   'hero.cta': 'Découvrir Nos Produits',
   'hero.cta2': 'Nous Contacter',
   'hero.label': 'Algérie · Export Ciment & Clinker',
@@ -329,7 +329,7 @@ const ar: Translations = {
   'nav.contact': 'اتصل بنا',
 
   'hero.title': 'AFIA EXPORT',
-  'hero.subtitle': 'متخصصون جزائريون في الأسمنت والكلينكر — جودة للأسواق العالمية',
+  'hero.subtitle': 'متخصصون في الأسمنت والكلنكر — جودة للأسواق العالمية',
   'hero.cta': 'اكتشف منتجاتنا',
   'hero.cta2': 'تواصل معنا',
   'hero.label': 'الجزائر · صادرات الأسمنت والكلينكر',
