@@ -13,27 +13,39 @@ export default function Contact() {
   const isRtl = language === 'ar';
   const fontAr = language === 'ar' ? { fontFamily: '"Cairo", sans-serif' } : {};
 
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', honeypot: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const name = form.name.trim();
     const email = form.email.trim();
     const phone = form.phone.trim();
     const message = form.message.trim();
-    // Basic email format validation
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-    const subject = encodeURIComponent(`Inquiry from ${name} — AFIA EXPORT Website`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\nMessage:\n${message}`
-    );
-    window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+
+    setSending(true);
+    setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, message, honeypot: form.honeypot }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to send.');
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputClass = `w-full border border-gray-200 rounded-xl px-4 py-3 text-dark bg-white focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-all text-sm md:text-base ${
@@ -142,13 +154,29 @@ export default function Contact() {
                     style={fontAr}
                   />
                 </div>
-                <button
-                  type="submit"
-                  className={`bg-primary hover:bg-red-800 text-white rounded-xl px-8 py-3.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${isRtl ? 'w-full' : 'w-full sm:w-auto'}`}
-                  style={fontAr}
-                >
-                  {t('contact.send')}
-                </button>
+                {/* Honeypot — hidden from humans, traps bots */}
+                <input
+                  name="honeypot"
+                  value={form.honeypot}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
+                />
+                <div className="space-y-3">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className={`bg-primary hover:bg-red-800 disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl px-8 py-3.5 font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${isRtl ? 'w-full' : 'w-full sm:w-auto'}`}
+                    style={fontAr}
+                  >
+                    {sending ? '...' : t('contact.send')}
+                  </button>
+                  {error && (
+                    <p className="text-red-600 text-sm" style={fontAr}>{error}</p>
+                  )}
+                </div>
               </form>
             )}
           </div>
