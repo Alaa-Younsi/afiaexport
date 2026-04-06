@@ -2,12 +2,10 @@ import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTranslation } from '../i18n/translations';
 
-// ============================================================
-// UPDATE THESE CONSTANTS BEFORE GOING LIVE
-// ============================================================
 const BUSINESS_EMAIL = 'contact@afiaexport.com';
-const WHATSAPP_NUMBER = '+213XXXXXXXXX'; // e.g. +213555123456
-// ============================================================
+const WHATSAPP_NUMBER = '+213561993175';
+const BUSINESS_PHONE = '0554219575';
+const BUSINESS_LOCATION = '12 CHEMIN ROMAIN BIRKHADEM ALGER';
 
 export default function Contact() {
   const { language } = useLanguage();
@@ -24,9 +22,15 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Inquiry from ${form.name} — AFIA EXPORT Website`);
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const phone = form.phone.trim();
+    const message = form.message.trim();
+    // Basic email format validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+    const subject = encodeURIComponent(`Inquiry from ${name} — AFIA EXPORT Website`);
     const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || 'N/A'}\n\nMessage:\n${form.message}`
+      `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\nMessage:\n${message}`
     );
     window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -80,6 +84,7 @@ export default function Contact() {
                       name="name"
                       type="text"
                       required
+                      maxLength={100}
                       value={form.name}
                       onChange={handleChange}
                       className={inputClass}
@@ -96,6 +101,7 @@ export default function Contact() {
                       name="email"
                       type="email"
                       required
+                      maxLength={254}
                       value={form.email}
                       onChange={handleChange}
                       className={inputClass}
@@ -113,6 +119,7 @@ export default function Contact() {
                     name="phone"
                     type="tel"
                     value={form.phone}
+                    maxLength={30}
                     onChange={handleChange}
                     className={inputClass}
                     style={fontAr}
@@ -128,6 +135,7 @@ export default function Contact() {
                     name="message"
                     rows={5}
                     required
+                    maxLength={2000}
                     value={form.message}
                     onChange={handleChange}
                     className={`${inputClass} resize-none`}
@@ -177,25 +185,35 @@ export default function Contact() {
               </a>
             </div>
 
-            {/* Business hours card */}
+            {/* Phone card */}
             <div className={`bg-white rounded-2xl p-6 shadow-sm w-full ${isRtl ? 'text-right' : ''}`}>
-              <h4 className="font-semibold text-dark text-sm mb-4" style={fontAr}>
-                {t('contact.hours.title')}
-              </h4>
-              <div className="space-y-2">
-                <div className={`flex items-center gap-2 text-sm text-gray-600 ${isRtl ? 'flex-row-reverse' : ''}`} style={fontAr}>
-                  <svg className="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div className={`flex items-center gap-3 mb-2 ${isRtl ? 'flex-row-reverse' : ''}`}>
+                <div className="w-9 h-9 bg-secondary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  {t('contact.hours.weekdays')}
                 </div>
-                <div className={`flex items-center gap-2 text-sm text-gray-600 ${isRtl ? 'flex-row-reverse' : ''}`} style={fontAr}>
-                  <svg className="w-4 h-4 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {t('contact.hours.weekend')}
-                </div>
+                <span className="font-semibold text-dark text-sm" style={fontAr}>Phone</span>
               </div>
+              <a href={`tel:${BUSINESS_PHONE}`} className="text-secondary hover:underline text-sm">
+                {BUSINESS_PHONE}
+              </a>
+            </div>
+
+            {/* Location card */}
+            <div className={`bg-white rounded-2xl p-6 shadow-sm w-full ${isRtl ? 'text-right' : ''}`}>
+              <div className={`flex items-center gap-3 mb-2 ${isRtl ? 'flex-row-reverse' : ''}`}>
+                <div className="w-9 h-9 bg-secondary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <span className="font-semibold text-dark text-sm" style={fontAr}>Location</span>
+              </div>
+              <p className="text-secondary text-sm leading-relaxed" style={fontAr}>
+                {BUSINESS_LOCATION}
+              </p>
             </div>
 
           </div>

@@ -32,6 +32,8 @@ export default function Navbar() {
             src="/logo.png"
             alt="AFIA EXPORT Logo"
             className={`transition-all duration-300 object-contain ${scrolled ? 'h-10' : 'h-[67px]'}`}
+            loading="eager"
+            fetchPriority="high"
           />
         </a>
 

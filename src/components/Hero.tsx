@@ -131,9 +131,10 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p
-            className="text-base md:text-xl text-[#CC1A1A] leading-relaxed mb-8 md:mb-10 max-w-xl animate-fade-in-delay font-semibold"
+            className="text-base md:text-xl text-white leading-relaxed mb-8 md:mb-10 max-w-xl animate-fade-in-delay font-semibold"
             style={{
               fontFamily: language === 'ar' ? '"Cairo", sans-serif' : '"DM Sans", sans-serif',
+              textShadow: '-1px -1px 0 rgba(0,0,0,0.55), 1px -1px 0 rgba(0,0,0,0.55), -1px 1px 0 rgba(0,0,0,0.55), 1px 1px 0 rgba(0,0,0,0.55)',
             }}
           >
             {t('hero.subtitle')}

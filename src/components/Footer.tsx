@@ -4,12 +4,10 @@ import { useTranslation } from '../i18n/translations';
 const navKeys = ['nav.about', 'nav.activities', 'nav.products', 'nav.markets', 'nav.contact'] as const;
 const navAnchors = ['about', 'activities', 'products', 'markets', 'contact'];
 
-// ============================================================
-// UPDATE THESE CONSTANTS BEFORE GOING LIVE
-// ============================================================
 const BUSINESS_EMAIL = 'contact@afiaexport.com';
-const WHATSAPP_NUMBER = '+213XXXXXXXXX';
-// ============================================================
+const WHATSAPP_NUMBER = '+213561993175';
+const BUSINESS_PHONE = '0554219575';
+const BUSINESS_LOCATION = '12 CHEMIN ROMAIN BIRKHADEM ALGER';
 
 export default function Footer() {
   const { language } = useLanguage();
@@ -29,6 +27,7 @@ export default function Footer() {
                 src="/logo.png"
                 alt="AFIA EXPORT Logo"
                 className="h-16 object-contain mb-4"
+                loading="lazy"
               />
             </a>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs" style={fontAr}>
@@ -91,10 +90,18 @@ export default function Footer() {
               </li>
               <li className={`flex items-start gap-2 text-white/60 text-sm ${isRtl ? 'flex-row-reverse' : ''}`} style={fontAr}>
                 <svg className="w-4 h-4 mt-0.5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <a href={`tel:${BUSINESS_PHONE}`} className="hover:text-primary transition-colors">
+                  {BUSINESS_PHONE}
+                </a>
+              </li>
+              <li className={`flex items-start gap-2 text-white/60 text-sm ${isRtl ? 'flex-row-reverse' : ''}`} style={fontAr}>
+                <svg className="w-4 h-4 mt-0.5 text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>Algeria</span>
+                <span>{BUSINESS_LOCATION}</span>
               </li>
             </ul>
           </div>
