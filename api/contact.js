@@ -69,15 +69,6 @@ export default async function handler(req, res) {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
 
-  // Log env vars presence (not values) to help debug on Vercel
-  console.log('[Contact API] ENV check:', {
-    SMTP_HOST: !!process.env.SMTP_HOST,
-    SMTP_PORT: !!process.env.SMTP_PORT,
-    SMTP_SECURE: !!process.env.SMTP_SECURE,
-    SMTP_USER: !!process.env.SMTP_USER,
-    SMTP_PASS: !!process.env.SMTP_PASS,
-  });
-
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT) || 465,
