@@ -1,11 +1,34 @@
 import nodemailer from 'nodemailer';
 
-const ALLOWED_ORIGIN = 'https://afiaexport.com';
+// Allowed origins — covers both www and non-www, and Vercel preview URLs
+const ALLOWED_ORIGINS = [
+  'https://afiaexport.com',
+  'https://www.afiaexport.com',
+];
+
+function isAllowedOrigin(origin) {
+  if (!origin) return true; // server-to-server or same-origin requests have no origin header
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  if (origin.endsWith('.vercel.app')) return true; // allow Vercel preview deployments
+  return false;
+}
 
 export default async function handler(req, res) {
-  // CORS — only allow requests from the real domain
   const origin = req.headers.origin;
-  if (origin && origin !== ALLOWED_ORIGIN) {
+
+  // Set CORS headers on every response
+  const allowedOrigin = isAllowedOrigin(origin) ? (origin ?? '*') : 'https://afiaexport.com';
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
+  // Block non-allowed origins (only if origin header is present and not allowed)
+  if (origin && !isAllowedOrigin(origin)) {
     return res.status(403).json({ error: 'Forbidden' });
   }
 
@@ -13,9 +36,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Honeypot check — bots fill hidden fields, humans don't
+  // Honeypot — bots fill this, humans don't
   if (req.body?.honeypot) {
-    return res.status(200).json({ success: true }); // silently discard
+    return res.status(200).json({ success: true });
   }
 
   const rawName    = String(req.body?.name    ?? '').trim();
@@ -23,7 +46,7 @@ export default async function handler(req, res) {
   const rawPhone   = String(req.body?.phone   ?? '').trim();
   const rawMessage = String(req.body?.message ?? '').trim();
 
-  // Server-side validation
+  // Validation
   if (!rawName || !rawEmail || !rawMessage) {
     return res.status(400).json({ error: 'Name, email and message are required.' });
   }
@@ -39,13 +62,21 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Input exceeds maximum length.' });
   }
 
-  // HTML sanitiser — prevent injection in the email body
   const esc = (str) =>
     str
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+
+  // Log env vars presence (not values) to help debug on Vercel
+  console.log('[Contact API] ENV check:', {
+    SMTP_HOST: !!process.env.SMTP_HOST,
+    SMTP_PORT: !!process.env.SMTP_PORT,
+    SMTP_SECURE: !!process.env.SMTP_SECURE,
+    SMTP_USER: !!process.env.SMTP_USER,
+    SMTP_PASS: !!process.env.SMTP_PASS,
+  });
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -55,12 +86,15 @@ export default async function handler(req, res) {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    tls: {
+      rejectUnauthorized: false, // needed for some hosting providers including Hostinger
+    },
   });
 
   try {
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `"AFIA EXPORT Website" <${process.env.SMTP_USER}>`,
-      to: 'contact@afiaexport.com',
+      to: process.env.SMTP_USER, // send to the same mailbox — contact@afiaexport.com
       replyTo: rawEmail,
       subject: `Inquiry from ${rawName} — AFIA EXPORT Website`,
       text: [
@@ -89,10 +123,10 @@ export default async function handler(req, res) {
         </div>
       `,
     });
-
+    console.log('[Contact API] Email sent:', info.messageId);
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error('[Contact API] Email send error:', err.message);
+    console.error('[Contact API] Send error:', err.message, err.code);
     return res.status(500).json({ error: 'Failed to send message. Please try again.' });
   }
 }
