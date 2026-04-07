@@ -1,4 +1,4 @@
-import { LanguageProvider } from './context/LanguageContext';
+import { LanguageProvider } from './context/LanguageProvider';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,6 +7,7 @@ import Strengths from './components/Strengths';
 import Activities from './components/Activities';
 import Products from './components/Products';
 import Markets from './components/Markets';
+import Documents from './components/Documents';
 import WhyUs from './components/WhyUs';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -24,6 +25,7 @@ function App() {
         <Activities />
         <Products />
         <Markets />
+        <Documents />
         <WhyUs />
         <Contact />
       </main>

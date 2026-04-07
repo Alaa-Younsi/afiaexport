@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
 
 const navKeys = ['nav.about', 'nav.activities', 'nav.products', 'nav.markets', 'nav.contact'] as const;

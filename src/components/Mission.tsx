@@ -1,4 +1,4 @@
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
 
 function TargetIcon() {
@@ -28,8 +28,19 @@ export default function Mission() {
   const fontAr = language === 'ar' ? { fontFamily: '"Cairo", sans-serif' } : {};
 
   return (
-    <section className="bg-surface py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
+    <section
+      className="relative py-20 md:py-28 overflow-hidden"
+      style={{
+        backgroundImage: "url('/background2.jpeg')",
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-dark/60 pointer-events-none" aria-hidden="true" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* Mission Card */}

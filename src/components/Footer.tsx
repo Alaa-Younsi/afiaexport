@@ -1,13 +1,13 @@
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
 
 const navKeys = ['nav.about', 'nav.activities', 'nav.products', 'nav.markets', 'nav.contact'] as const;
 const navAnchors = ['about', 'activities', 'products', 'markets', 'contact'];
 
 const BUSINESS_EMAIL = 'contact@afiaexport.com';
-const WHATSAPP_NUMBER = '+213561993175';
+const WHATSAPP_NUMBER = '+213554219575';
 const BUSINESS_PHONE = '0554219575';
-const BUSINESS_LOCATION = '12 CHEMIN ROMAIN BIRKHADEM ALGER';
+const BUSINESS_LOCATION = '24 CHEMIN ROMAIN BIRKHADEM ALGER';
 
 export default function Footer() {
   const { language } = useLanguage();

@@ -1,4 +1,4 @@
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
 
 const strengthIcons = [
@@ -28,16 +28,27 @@ export default function Strengths() {
   const items = tArr('strengths.items');
 
   return (
-    <section className="bg-surface py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
+    <section
+      className="relative py-20 md:py-28 overflow-hidden"
+      style={{
+        backgroundImage: "url('/background2.jpeg')",
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-dark/60 pointer-events-none" aria-hidden="true" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
 
         {/* Section header */}
         <div className={`text-center mb-14 ${isRtl ? 'font-cairo' : ''}`}>
-          <span className={`inline-block text-xs font-semibold uppercase text-primary mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
+          <span className={`inline-block text-xs font-semibold uppercase text-white/70 mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
             {t('strengths.label')}
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-dark"
+            className="text-3xl md:text-4xl font-bold text-white"
             style={{ fontFamily: language === 'ar' ? '"Cairo", sans-serif' : '"Playfair Display", serif', ...fontAr }}
           >
             {t('strengths.title')}

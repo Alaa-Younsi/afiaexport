@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
 
 export default function Products() {
@@ -14,16 +14,28 @@ export default function Products() {
   const clinkerFeatures = tArr('products.clinker.features');
 
   return (
-    <section id="products" className="bg-surface py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
+    <section
+      id="products"
+      className="relative py-20 md:py-28 overflow-hidden"
+      style={{
+        backgroundImage: "url('/background3.jpeg')",
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-dark/60 pointer-events-none" aria-hidden="true" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
 
         {/* Section header */}
         <div className={`text-center mb-10 ${isRtl ? '' : ''}`}>
-          <span className={`inline-block text-xs font-semibold uppercase text-primary mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
+          <span className={`inline-block text-xs font-semibold uppercase text-white/70 mb-3 ${language === 'ar' ? '' : 'tracking-widest'}`} style={fontAr}>
             {t('products.label')}
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-dark"
+            className="text-3xl md:text-4xl font-bold text-white"
             style={{ fontFamily: language === 'ar' ? '"Cairo", sans-serif' : '"Playfair Display", serif', ...fontAr }}
           >
             {t('products.title')}

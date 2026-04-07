@@ -73,6 +73,14 @@ export interface Translations {
   'footer.rights': string;
   'footer.quicklinks': string;
   'footer.contactinfo': string;
+  'documents.title': string;
+  'documents.label': string;
+  'documents.certs.tab': string;
+  'documents.specs.tab': string;
+  'documents.certs.subtitle': string;
+  'documents.specs.subtitle': string;
+  'documents.cert.item': string;
+  'documents.spec.item': string;
 }
 
 const en: Translations = {
@@ -83,7 +91,7 @@ const en: Translations = {
   'nav.contact': 'Contact',
 
   'hero.title': 'AFIA EXPORT',
-  'hero.subtitle': 'Specialists in cement and clinker — quality for global markets',
+  'hero.subtitle': 'Specialists in exporting cement and clinker — quality for global markets',
   'hero.cta': 'Discover Our Products',
   'hero.cta2': 'Contact Us',
   'hero.label': 'Algeria · Cement & Clinker Exports',
@@ -196,6 +204,15 @@ const en: Translations = {
   'footer.rights': '© 2026 AFIA EXPORT. All rights reserved.',
   'footer.quicklinks': 'Quick Links',
   'footer.contactinfo': 'Contact Info',
+
+  'documents.title': 'Documents',
+  'documents.label': 'AFIA EXPORT',
+  'documents.certs.tab': 'Certifications',
+  'documents.specs.tab': 'Technical Specifications',
+  'documents.certs.subtitle': 'Quality & Compliance Certificates',
+  'documents.specs.subtitle': 'Technical Specification Sheets',
+  'documents.cert.item': 'Certificate',
+  'documents.spec.item': 'Technical Specification',
 };
 
 const fr: Translations = {
@@ -206,7 +223,7 @@ const fr: Translations = {
   'nav.contact': 'Contact',
 
   'hero.title': 'AFIA EXPORT',
-  'hero.subtitle': 'Spécialistes du ciment et du clinker — la qualité pour les marchés mondiaux',
+  'hero.subtitle': 'Spécialistes de l\'exportation de ciment et de clinker — la qualité pour les marchés mondiaux',
   'hero.cta': 'Découvrir Nos Produits',
   'hero.cta2': 'Nous Contacter',
   'hero.label': 'Algérie · Export Ciment & Clinker',
@@ -319,6 +336,15 @@ const fr: Translations = {
   'footer.rights': '© 2026 AFIA EXPORT. Tous droits réservés.',
   'footer.quicklinks': 'Liens Rapides',
   'footer.contactinfo': 'Coordonnées',
+
+  'documents.title': 'Documents',
+  'documents.label': 'AFIA EXPORT',
+  'documents.certs.tab': 'Certifications',
+  'documents.specs.tab': 'Spécifications Techniques',
+  'documents.certs.subtitle': 'Certificats Qualité & Conformité',
+  'documents.specs.subtitle': 'Fiches de Spécifications Techniques',
+  'documents.cert.item': 'Certificat',
+  'documents.spec.item': 'Spécification Technique',
 };
 
 const ar: Translations = {
@@ -329,7 +355,7 @@ const ar: Translations = {
   'nav.contact': 'اتصل بنا',
 
   'hero.title': 'AFIA EXPORT',
-  'hero.subtitle': 'متخصصون في الأسمنت والكلنكر — جودة للأسواق العالمية',
+  'hero.subtitle': 'متخصصون في تصدير الأسمنت والكلنكر — جودة للأسواق العالمية',
   'hero.cta': 'اكتشف منتجاتنا',
   'hero.cta2': 'تواصل معنا',
   'hero.label': 'الجزائر · صادرات الأسمنت والكلينكر',
@@ -442,6 +468,15 @@ const ar: Translations = {
   'footer.rights': '© ٢٠٢٦ AFIA EXPORT. جميع الحقوق محفوظة.',
   'footer.quicklinks': 'روابط سريعة',
   'footer.contactinfo': 'معلومات الاتصال',
+
+  'documents.title': 'الوثائق',
+  'documents.label': 'AFIA EXPORT',
+  'documents.certs.tab': 'شهادات الاعتماد',
+  'documents.specs.tab': 'المواصفات التقنية',
+  'documents.certs.subtitle': 'شهادات الجودة والامتثال',
+  'documents.specs.subtitle': 'بيانات المواصفات التقنية',
+  'documents.cert.item': 'شهادة',
+  'documents.spec.item': 'مواصفة تقنية',
 };
 
 export const translations: Record<Lang, Translations> = { en, fr, ar };

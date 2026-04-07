@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
 
 const BUSINESS_EMAIL = 'contact@afiaexport.com';
-const WHATSAPP_NUMBER = '+213561993175';
+const WHATSAPP_NUMBER = '+213554219575';
 const BUSINESS_PHONE = '0554219575';
-const BUSINESS_LOCATION = '12 CHEMIN ROMAIN BIRKHADEM ALGER';
+const BUSINESS_LOCATION = '24 CHEMIN ROMAIN BIRKHADEM ALGER';
 
 export default function Contact() {
   const { language } = useLanguage();
