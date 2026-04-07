@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
+import type { Translations } from '../i18n/translations';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Replace empty strings with actual image paths once you upload the files.
@@ -24,6 +25,14 @@ const CERT_IMAGES: string[] = [
   '/certificate%201.jpeg',
   '/certificate2.jpeg',
   '/certificate3.jpeg',
+];
+
+// European Certifications — 4 certificates
+const EURO_CERT_IMAGES: string[] = [
+  '/eurocertificate1.jpeg',
+  '/eurocertificate2.jpeg',
+  '/eurocertificate3.jpeg',
+  '/eurocertificate4.jpeg',
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -61,29 +70,42 @@ function Lightbox({ src, label, onClose }: { src: string; label: string; onClose
 }
 
 // ── Thumbnail slot ────────────────────────────────────────────────────────────
-function ImageSlot({ src, label, onOpen }: { src: string; label: string; onOpen?: () => void }) {
+function ImageSlot({ src, label, onOpen, description }: {
+  src: string;
+  label: string;
+  onOpen?: () => void;
+  description?: string;
+}) {
   if (src) {
     return (
       <button
         onClick={onOpen}
-        className="group relative rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
+        className="group rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary text-left w-full"
         aria-label={`View ${label}`}
       >
-        <img
-          src={src}
-          alt={label}
-          className="w-full aspect-[3/4] object-contain"
-          loading="lazy"
-        />
-        {/* Zoom hint */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 rounded-full p-2 shadow">
-            <svg className="w-5 h-5 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-            </svg>
+        {/* Image + zoom overlay */}
+        <div className="relative">
+          <img
+            src={src}
+            alt={label}
+            className="w-full aspect-[3/4] object-contain"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 rounded-full p-2 shadow">
+              <svg className="w-5 h-5 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+              </svg>
+            </div>
           </div>
         </div>
-        <p className="text-xs text-gray-500 text-center py-2 px-2 truncate">{label}</p>
+        {/* Label + optional description */}
+        <div className="px-3 py-2">
+          <p className="text-xs font-semibold text-gray-700 text-center truncate">{label}</p>
+          {description && (
+            <p className="text-xs text-gray-500 text-center mt-1 leading-relaxed">{description}</p>
+          )}
+        </div>
       </button>
     );
   }
@@ -111,7 +133,7 @@ function ImageSlot({ src, label, onOpen }: { src: string; label: string; onOpen?
 export default function Documents() {
   const { language } = useLanguage();
   const { t } = useTranslation(language);
-  const [activeTab, setActiveTab] = useState<'certs' | 'specs'>('certs');
+  const [activeTab, setActiveTab] = useState<'certs' | 'euro' | 'specs'>('certs');
   const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
 
   return (
@@ -131,9 +153,9 @@ export default function Documents() {
           </h2>
         </div>
 
-        {/* Tab switcher — Certifications first */}
+        {/* Tab switcher */}
         <div className="flex justify-center mb-10">
-          <div className="flex bg-surface rounded-2xl p-1.5 shadow-sm gap-1">
+          <div className="flex flex-wrap justify-center bg-surface rounded-2xl p-1.5 shadow-sm gap-1">
             <button
               onClick={() => setActiveTab('certs')}
               className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
@@ -144,6 +166,17 @@ export default function Documents() {
               aria-pressed={activeTab === 'certs'}
             >
               {t('documents.certs.tab')}
+            </button>
+            <button
+              onClick={() => setActiveTab('euro')}
+              className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                activeTab === 'euro'
+                  ? 'bg-primary text-white shadow-md'
+                  : 'text-gray-600 hover:text-primary'
+              }`}
+              aria-pressed={activeTab === 'euro'}
+            >
+              {t('documents.eurocerts.tab')}
             </button>
             <button
               onClick={() => setActiveTab('specs')}
@@ -177,6 +210,28 @@ export default function Documents() {
                         onOpen={src ? () => setLightbox({ src, label }) : undefined}
                       />
                     </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : activeTab === 'euro' ? (
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-6">
+                {t('documents.eurocerts.subtitle')}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {EURO_CERT_IMAGES.map((src, i) => {
+                  const label = `${t('documents.eurocert.item')} ${i + 1}`;
+                  const descKey = `documents.eurocerts.desc${i + 1}` as keyof Translations;
+                  const desc = t(descKey);
+                  return (
+                    <ImageSlot
+                      key={i}
+                      src={src}
+                      label={label}
+                      description={desc}
+                      onOpen={src ? () => setLightbox({ src, label }) : undefined}
+                    />
                   );
                 })}
               </div>

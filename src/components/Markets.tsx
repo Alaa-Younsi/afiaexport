@@ -71,6 +71,8 @@ const marketData = [
     descKey: 'markets.europe.desc' as const,
     color: 'bg-blue-50 border-blue-200',
     accentColor: 'text-secondary',
+    bgImage: '/europe.png',
+    fadeHex: '#eff6ff',
   },
   {
     key: 'africa' as const,
@@ -78,6 +80,8 @@ const marketData = [
     descKey: 'markets.africa.desc' as const,
     color: 'bg-red-50 border-red-200',
     accentColor: 'text-secondary',
+    bgImage: '/africa.png',
+    fadeHex: '#fef2f2',
   },
   {
     key: 'middleeast' as const,
@@ -85,6 +89,8 @@ const marketData = [
     descKey: 'markets.middleeast.desc' as const,
     color: 'bg-green-50 border-green-200',
     accentColor: 'text-green-600',
+    bgImage: '/middleeast.png',
+    fadeHex: '#f0fdf4',
   },
 ];
 
@@ -130,15 +136,38 @@ export default function Markets() {
           {marketData.map((m, i) => (
             <div
               key={m.key}
-              className={`border rounded-2xl p-8 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-200 ${m.color}`}
+              className={`border rounded-2xl overflow-hidden text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-200 ${m.color}`}
             >
-              <m.Icon />
-              <h3 className={`text-xl font-bold mb-3 ${m.accentColor}`} style={fontAr}>
-                {marketNames[i]}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed" style={fontAr}>
-                {t(m.descKey)}
-              </p>
+              {/* Top image zone — fades out downward into card background */}
+              <div className="relative h-44">
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url('${m.bgImage}')` }}
+                  aria-hidden="true"
+                />
+                {/* Vignette overlay — darkens edges like parallax sections */}
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%)' }}
+                  aria-hidden="true"
+                />
+                {/* Fade to card background color at bottom */}
+                <div
+                  className="absolute inset-x-0 bottom-0 h-24"
+                  style={{ background: `linear-gradient(to bottom, transparent, ${m.fadeHex})` }}
+                  aria-hidden="true"
+                />
+              </div>
+              {/* Content */}
+              <div className="px-8 pb-8 text-center">
+                <m.Icon />
+                <h3 className={`text-xl font-bold mb-3 ${m.accentColor}`} style={fontAr}>
+                  {marketNames[i]}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed" style={fontAr}>
+                  {t(m.descKey)}
+                </p>
+              </div>
             </div>
           ))}
         </div>
