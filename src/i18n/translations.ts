@@ -81,13 +81,13 @@ export interface Translations {
   'documents.specs.subtitle': string;
   'documents.cert.item': string;
   'documents.spec.item': string;
+  'documents.specs.front': string;
+  'documents.specs.back': string;
   'documents.eurocerts.tab': string;
   'documents.eurocerts.subtitle': string;
   'documents.eurocert.item': string;
-  'documents.eurocerts.desc1': string;
-  'documents.eurocerts.desc2': string;
-  'documents.eurocerts.desc3': string;
-  'documents.eurocerts.desc4': string;
+  'documents.eurocerts.notice': string;
+  'documents.eurocerts.tagline': string;
 }
 
 const en: Translations = {
@@ -220,14 +220,14 @@ const en: Translations = {
   'documents.specs.subtitle': 'Technical Specification Sheets',
   'documents.cert.item': 'Certificate',
   'documents.spec.item': 'Technical Specification',
+  'documents.specs.front': 'Front',
+  'documents.specs.back': 'Back',
 
   'documents.eurocerts.tab': 'European Certifications',
   'documents.eurocerts.subtitle': 'European Conformity & Quality Certificates',
   'documents.eurocert.item': 'European Certificate',
-  'documents.eurocerts.desc1': 'CE conformity marking certificate attesting that AFIA EXPORT cement complies with the essential requirements of the EU Construction Products Regulation (CPR 305/2011).',
-  'documents.eurocerts.desc2': 'Factory Production Control certificate issued by a European notified body, confirming systematic quality management throughout our cement manufacturing and export process.',
-  'documents.eurocerts.desc3': 'EN 197-1 type-testing certificate issued by an accredited European laboratory, validating the compressive strength and chemical composition of our Portland cement grades.',
-  'documents.eurocerts.desc4': 'Declaration of Performance (DoP) documenting the certified mechanical, physical and chemical properties of our CEM I 42.5 and CEM I 52.5 cement products for European markets.',
+  'documents.eurocerts.notice': 'All CE certifications displayed apply to the respective cement products and are issued by the manufacturing plants in compliance with EN 197-1 European standards.',
+  'documents.eurocerts.tagline': 'Our cement is sourced from certified manufacturers compliant with European standards (EN 197-1) and CE marking.',
 };
 
 const fr: Translations = {
@@ -360,14 +360,14 @@ const fr: Translations = {
   'documents.specs.subtitle': 'Fiches de Spécifications Techniques',
   'documents.cert.item': 'Certificat',
   'documents.spec.item': 'Spécification Technique',
+  'documents.specs.front': 'Recto',
+  'documents.specs.back': 'Verso',
 
   'documents.eurocerts.tab': 'Certifications Européennes',
   'documents.eurocerts.subtitle': 'Certificats Européens de Conformité & Qualité',
   'documents.eurocert.item': 'Certificat Européen',
-  'documents.eurocerts.desc1': 'Certificat de marquage CE attestant que le ciment AFIA EXPORT est conforme aux exigences essentielles du Règlement Européen sur les Produits de Construction (CPR 305/2011).',
-  'documents.eurocerts.desc2': 'Certificat de Contrôle de la Production en Usine (CPU) délivré par un organisme notifié européen, confirmant la gestion qualité tout au long de notre processus de fabrication et d\'exportation.',
-  'documents.eurocerts.desc3': 'Certificat d\'essai de type EN 197-1 délivré par un laboratoire européen accrédité, validant la résistance à la compression et la composition chimique de nos ciments Portland.',
-  'documents.eurocerts.desc4': 'Déclaration des Performances (DdP) documentant les propriétés mécaniques, physiques et chimiques certifiées de nos ciments CEM I 42.5 et CEM I 52.5 pour les marchés européens.',
+  'documents.eurocerts.notice': 'Toutes les certifications CE présentées s\'appliquent aux produits cimentiers concernés et sont délivrées par les usines de fabrication en conformité avec les normes européennes EN 197-1.',
+  'documents.eurocerts.tagline': 'Notre ciment est approvisionné auprès de fabricants certifiés conformes aux normes européennes (EN 197-1) et au marquage CE.',
 };
 
 const ar: Translations = {
@@ -500,14 +500,14 @@ const ar: Translations = {
   'documents.specs.subtitle': 'بيانات المواصفات التقنية',
   'documents.cert.item': 'شهادة',
   'documents.spec.item': 'مواصفة تقنية',
+  'documents.specs.front': 'الوجه الأمامي',
+  'documents.specs.back': 'الوجه الخلفي',
 
   'documents.eurocerts.tab': 'الشهادات الأوروبية',
   'documents.eurocerts.subtitle': 'شهادات المطابقة والجودة الأوروبية',
   'documents.eurocert.item': 'شهادة أوروبية',
-  'documents.eurocerts.desc1': 'شهادة علامة CE التي تؤكد امتثال أسمنت AFIA EXPORT للمتطلبات الأساسية للائحة الأوروبية بشأن منتجات البناء (CPR 305/2011).',
-  'documents.eurocerts.desc2': 'شهادة التحكم في الإنتاج المصنعي صادرة عن جهة إخطار أوروبية معتمدة، تؤكد إدارة الجودة الشاملة طوال عملية التصنيع والتصدير.',
-  'documents.eurocerts.desc3': 'شهادة اختبار النوع وفق EN 197-1 صادرة عن مختبر أوروبي معتمد، تُثبت مقاومة الضغط والتركيب الكيميائي لأنواع الأسمنت البورتلاندي.',
-  'documents.eurocerts.desc4': 'إعلان الأداء (DoP) الموثِّق للخصائص الميكانيكية والفيزيائية والكيميائية المعتمدة لمنتجات الأسمنت CEM I 42.5 و CEM I 52.5 للأسواق الأوروبية.',
+  'documents.eurocerts.notice': 'جميع شهادات CE المعروضة تنطبق على منتجات الأسمنت المعنية، وتصدر عن مصانع التصنيع امتثالاً للمعايير الأوروبية EN 197-1.',
+  'documents.eurocerts.tagline': 'يتم توريد أسمنتنا من مصنّعين حاصلين على شهادات مطابقة للمعايير الأوروبية (EN 197-1) وعلامة CE.',
 };
 
 export const translations: Record<Lang, Translations> = { en, fr, ar };

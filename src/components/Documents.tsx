@@ -1,23 +1,22 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/useLanguage';
 import { useTranslation } from '../i18n/translations';
-import type { Translations } from '../i18n/translations';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Replace empty strings with actual image paths once you upload the files.
 // Example: '/documents/spec1.jpg'
-// Technical Specifications — 10 pages
+// Technical Specifications — 5 documents × 2 sides (front then back), ftechnique10 pending
 const SPEC_IMAGES: string[] = [
-  '', // spec 1
-  '', // spec 2
-  '', // spec 3
-  '', // spec 4
-  '', // spec 5
-  '', // spec 6
-  '', // spec 7
-  '', // spec 8
-  '', // spec 9
-  '', // spec 10
+  '/ftechnique1.png', // doc 1 — front
+  '/ftechnique2.png', // doc 1 — back
+  '/ftechnique3.png', // doc 2 — front
+  '/ftechnique4.png', // doc 2 — back
+  '/ftechnique5.png', // doc 3 — front
+  '/ftechnique6.png', // doc 3 — back
+  '/ftechnique7.png', // doc 4 — front
+  '/ftechnique8.png', // doc 4 — back
+  '/ftechnique9.png', // doc 5 — front
+  '',                 // doc 5 — back (ftechnique10 pending upload)
 ];
 
 // Certifications — 3 certificates
@@ -70,11 +69,12 @@ function Lightbox({ src, label, onClose }: { src: string; label: string; onClose
 }
 
 // ── Thumbnail slot ────────────────────────────────────────────────────────────
-function ImageSlot({ src, label, onOpen, description }: {
+function ImageSlot({ src, label, onOpen, description, natural }: {
   src: string;
   label: string;
   onOpen?: () => void;
   description?: string;
+  natural?: boolean;
 }) {
   if (src) {
     return (
@@ -88,7 +88,7 @@ function ImageSlot({ src, label, onOpen, description }: {
           <img
             src={src}
             alt={label}
-            className="w-full aspect-[3/4] object-contain"
+            className={natural ? 'w-full h-auto block' : 'w-full aspect-[3/4] object-contain'}
             loading="lazy"
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
@@ -110,7 +110,7 @@ function ImageSlot({ src, label, onOpen, description }: {
     );
   }
   return (
-    <div className="aspect-[3/4] border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center gap-2 bg-white/80">
+    <div className={`${natural ? 'min-h-40' : 'aspect-[3/4]'} border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center gap-2 bg-white/80`}>
       <svg
         className="w-8 h-8 text-gray-300"
         fill="none"
@@ -133,7 +133,7 @@ function ImageSlot({ src, label, onOpen, description }: {
 export default function Documents() {
   const { language } = useLanguage();
   const { t } = useTranslation(language);
-  const [activeTab, setActiveTab] = useState<'certs' | 'euro' | 'specs'>('certs');
+  const [activeTab, setActiveTab] = useState<'certs' | 'euro' | 'specs'>('euro');
   const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
 
   return (
@@ -153,20 +153,9 @@ export default function Documents() {
           </h2>
         </div>
 
-        {/* Tab switcher */}
-        <div className="flex justify-center mb-10">
+        {/* Tab switcher — European Certifications first */}
+        <div className="flex justify-center mb-4">
           <div className="flex flex-wrap justify-center bg-surface rounded-2xl p-1.5 shadow-sm gap-1">
-            <button
-              onClick={() => setActiveTab('certs')}
-              className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
-                activeTab === 'certs'
-                  ? 'bg-primary text-white shadow-md'
-                  : 'text-gray-600 hover:text-primary'
-              }`}
-              aria-pressed={activeTab === 'certs'}
-            >
-              {t('documents.certs.tab')}
-            </button>
             <button
               onClick={() => setActiveTab('euro')}
               className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
@@ -177,6 +166,17 @@ export default function Documents() {
               aria-pressed={activeTab === 'euro'}
             >
               {t('documents.eurocerts.tab')}
+            </button>
+            <button
+              onClick={() => setActiveTab('certs')}
+              className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                activeTab === 'certs'
+                  ? 'bg-primary text-white shadow-md'
+                  : 'text-gray-600 hover:text-primary'
+              }`}
+              aria-pressed={activeTab === 'certs'}
+            >
+              {t('documents.certs.tab')}
             </button>
             <button
               onClick={() => setActiveTab('specs')}
@@ -191,6 +191,13 @@ export default function Documents() {
             </button>
           </div>
         </div>
+
+        {/* Euro tagline — shown only under the tab bar when euro is active */}
+        {activeTab === 'euro' && (
+          <p className="text-center text-sm text-gray-500 italic mb-8 max-w-2xl mx-auto">
+            {t('documents.eurocerts.tagline')}
+          </p>
+        )}
 
         {/* Content panel */}
         <div className="bg-surface rounded-3xl shadow-sm p-8 md:p-12">
@@ -216,20 +223,20 @@ export default function Documents() {
             </div>
           ) : activeTab === 'euro' ? (
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-6">
+              <p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">
                 {t('documents.eurocerts.subtitle')}
+              </p>
+              <p className="text-sm text-gray-500 text-center italic mb-8 max-w-2xl mx-auto">
+                {t('documents.eurocerts.notice')}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {EURO_CERT_IMAGES.map((src, i) => {
                   const label = `${t('documents.eurocert.item')} ${i + 1}`;
-                  const descKey = `documents.eurocerts.desc${i + 1}` as keyof Translations;
-                  const desc = t(descKey);
                   return (
                     <ImageSlot
                       key={i}
                       src={src}
                       label={label}
-                      description={desc}
                       onOpen={src ? () => setLightbox({ src, label }) : undefined}
                     />
                   );
@@ -241,16 +248,26 @@ export default function Documents() {
               <p className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-6">
                 {t('documents.specs.subtitle')}
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {SPEC_IMAGES.map((src, i) => {
-                  const label = `${t('documents.spec.item')} ${i + 1}`;
+              {/* 5 columns — one per document pair; front on top, back below */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                {Array.from({ length: 5 }, (_, docIdx) => {
+                  const frontSrc = SPEC_IMAGES[docIdx * 2];
+                  const backSrc  = SPEC_IMAGES[docIdx * 2 + 1];
+                  const frontLabel = `${t('documents.spec.item')} ${docIdx + 1} — ${t('documents.specs.front')}`;
+                  const backLabel  = `${t('documents.spec.item')} ${docIdx + 1} — ${t('documents.specs.back')}`;
                   return (
-                    <ImageSlot
-                      key={i}
-                      src={src}
-                      label={label}
-                      onOpen={src ? () => setLightbox({ src, label }) : undefined}
-                    />
+                    <div key={docIdx} className="flex flex-col gap-4">
+                      <ImageSlot
+                        src={frontSrc}
+                        label={frontLabel}
+                        onOpen={frontSrc ? () => setLightbox({ src: frontSrc, label: frontLabel }) : undefined}
+                      />
+                      <ImageSlot
+                        src={backSrc}
+                        label={backLabel}
+                        onOpen={backSrc ? () => setLightbox({ src: backSrc, label: backLabel }) : undefined}
+                      />
+                    </div>
                   );
                 })}
               </div>
