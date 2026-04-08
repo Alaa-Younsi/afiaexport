@@ -5,18 +5,18 @@ import { useTranslation } from '../i18n/translations';
 // ─────────────────────────────────────────────────────────────────────────────
 // Replace empty strings with actual image paths once you upload the files.
 // Example: '/documents/spec1.jpg'
-// Technical Specifications — 5 documents × 2 sides (front then back), ftechnique10 pending
+// Technical Specifications — 5 documents × 2 sides (front then back)
 const SPEC_IMAGES: string[] = [
-  '/ftechnique1.png', // doc 1 — front
-  '/ftechnique2.png', // doc 1 — back
-  '/ftechnique3.png', // doc 2 — front
-  '/ftechnique4.png', // doc 2 — back
-  '/ftechnique5.png', // doc 3 — front
-  '/ftechnique6.png', // doc 3 — back
-  '/ftechnique7.png', // doc 4 — front
-  '/ftechnique8.png', // doc 4 — back
-  '/ftechnique9.png', // doc 5 — front
-  '',                 // doc 5 — back (ftechnique10 pending upload)
+  '/ftechnique1.jpg',  // doc 1 — front
+  '/ftechnique2.jpg',  // doc 1 — back
+  '/ftechnique3.jpg',  // doc 2 — front
+  '/ftechnique4.jpg',  // doc 2 — back
+  '/ftechnique5.jpg',  // doc 3 — front
+  '/ftechnique6.jpg',  // doc 3 — back
+  '/ftechnique7.jpg',  // doc 4 — front
+  '/ftechnique8.jpg',  // doc 4 — back
+  '/ftechnique9.jpg',  // doc 5 — front
+  '/ftechnique10.jpg', // doc 5 — back
 ];
 
 // Certifications — 3 certificates
