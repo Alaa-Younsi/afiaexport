@@ -115,7 +115,15 @@ export default function Footer() {
             {t('footer.rights')}
           </p>
           <p className="text-white/30 text-xs">
-            Algeria 🇩🇿
+            Website created by{' '}
+            <a
+              href="https://alaayounsi.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white/60 transition-colors"
+            >
+              Alaa Younsi
+            </a>
           </p>
         </div>
       </div>
