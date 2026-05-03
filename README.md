@@ -1,53 +1,89 @@
-# React + TypeScript + Vite
+# AFIA EXPORT — Official Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Developed by [Alaa Younsi](https://github.com/alaayounsi) — Web Developer**
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About the Project
 
-## Expanding the ESLint configuration
+This is the official website for **AFIA EXPORT**, an Algerian company specializing in the international export of **cement and clinker**. The company supplies high-quality construction materials to markets across three continents — Europe, Africa, and the Middle East — operating under FOB maritime export conditions and holding EN 197-1 certification.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The website serves as a professional digital presence for AFIA EXPORT, covering the company's story, core activities, product catalog, target markets, certifications, and a direct contact channel for business inquiries. The site is fully multilingual, supporting **English**, **French**, and **Arabic**.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| **React 19** | UI component library |
+| **TypeScript** | Static typing across the entire codebase |
+| **Vite** | Build tool and development server |
+| **Tailwind CSS** | Utility-first CSS framework for styling |
+| **PostCSS + Autoprefixer** | CSS processing and cross-browser compatibility |
+| **Nodemailer** | Server-side email handling for the contact form |
+| **ESLint + typescript-eslint** | Code linting and quality enforcement |
+| **Vercel** | Deployment and serverless API hosting |
+
+---
+
+## Project Structure
+
+```
+afiaexport-git/
+├── api/
+│   └── contact.js              # Serverless function — handles contact form emails
+├── public/
+│   ├── robots.txt
+│   └── sitemap.xml
+├── src/
+│   ├── assets/                 # Static assets (images, icons, etc.)
+│   ├── components/
+│   │   ├── About.tsx           # Company overview section
+│   │   ├── Activities.tsx      # Core business activities section
+│   │   ├── Contact.tsx         # Contact form and info section
+│   │   ├── Documents.tsx       # Certificates and technical spec sheets
+│   │   ├── Footer.tsx          # Site footer
+│   │   ├── Hero.tsx            # Landing hero section
+│   │   ├── Markets.tsx         # Target export markets section
+│   │   ├── Mission.tsx         # Mission and vision section
+│   │   ├── Navbar.tsx          # Navigation bar with language switcher
+│   │   ├── Products.tsx        # Cement and clinker product catalog
+│   │   ├── ScrollToTop.tsx     # Scroll-to-top utility component
+│   │   ├── Strengths.tsx       # Company strengths section
+│   │   └── WhyUs.tsx           # Why choose AFIA EXPORT section
+│   ├── context/
+│   │   ├── LanguageContext.tsx # Language context definition
+│   │   ├── LanguageProvider.tsx# Language context provider (EN / FR / AR)
+│   │   └── useLanguage.ts      # Custom hook for consuming language context
+│   ├── i18n/
+│   │   └── translations.ts     # All UI strings in English, French, and Arabic
+│   ├── App.tsx                 # Root application component
+│   ├── App.css                 # Global application styles
+│   ├── index.css               # Base/reset styles
+│   ├── main.tsx                # Application entry point
+│   └── vite-env.d.ts           # Vite environment type declarations
+├── index.html                  # HTML entry point
+├── vite.config.ts              # Vite configuration
+├── tailwind.config.js          # Tailwind CSS configuration
+├── postcss.config.js           # PostCSS configuration
+├── tsconfig.json               # Root TypeScript config
+├── tsconfig.app.json           # App TypeScript config
+├── tsconfig.node.json          # Node TypeScript config
+├── eslint.config.js            # ESLint configuration
+├── vercel.json                 # Vercel deployment configuration
+└── package.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## License & Usage Restrictions
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
+**All rights reserved © Alaa Younsi.**
+
+The source code, design, structure, and content of this project are the exclusive intellectual property of the developer. **No part of this project may be copied, reproduced, modified, distributed, or reused — in whole or in part — for any purpose, commercial or otherwise, without explicit written permission from the author.**
+
+This repository is shared publicly for portfolio and reference purposes only.
     ...reactDom.configs.recommended.rules,
   },
 })
